@@ -1,0 +1,47 @@
+docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-network
+
+docker network create --driver bridge my-app
+
+docker run -d --name=mysql --network=my-app mysql
+
+MYSQL_PASSWORD
+MYSQL_ROOT_PASSWORD
+
+docker run -d --name=web --network=my-app my-webapp
+
+docker run -d \
+  --name my-container \
+  --mount type=volume,source=my_volume_name,target=/path/in/container \
+  nginx:latest
+docker run -d --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 --mount type=bind,source=/opt/data,target=/var/lib/mysql mysql
+
+
+docker login private-registry.io
+docker run private-registry.io/apps/internal-app
+
+run you own registry
+docker run -d -p 5000:5000 --name registry registry:2
+docker image tag my-image localhost:5000/my-image
+docker push localhost:5000/my-image
+docker pull localhost:5000/my-image
+docker pull 192.168.56.100:5000/my-image
+
+
+
+
+
+docker swarm init
+docker swarm join
+docker swarm init --advertise-addr 192.168.1.12
+
+docker service create --replicas=3 my-web-server
+docker service create -e MODE=prod -p 80:80 --network web --replicas=3 my-web-server
+
+kubectl create deployment my-web-server --image=my-web-server --replicas=1000
+
+
+
+kubectl run hello-minikube
+kubectl cluster-info
+kubectl get nodes
+kubectl run nginx-pod --image=nginx
